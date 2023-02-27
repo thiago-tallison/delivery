@@ -1,3 +1,5 @@
+import { Banner } from '@/components/Banner'
+import { ProductsGrid } from '@/components/ProductsGrid'
 import { SearchInput } from '@/components/SearchInput'
 import Head from 'next/head'
 
@@ -10,6 +12,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main>
         <header className="bg-[#F9F9FB] px-6 pb-8">
           {/* TOP */}
@@ -39,6 +42,14 @@ export default function Home() {
             />
           </div>
         </header>
+
+        <section className="mx-6">
+          <Banner images={['/images/banner-1.png', '/images/banner-2.png']} />
+        </section>
+
+        <section className="mx-6 mt-6">
+          <ProductsGrid />
+        </section>
       </main>
     </>
   )
