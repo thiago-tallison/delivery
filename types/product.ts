@@ -11,6 +11,6 @@ export type Product = {
   img: string
 }
 
-export type ChartProduct = {
+export type CartProduct = {
   quantity: number
 } & Product

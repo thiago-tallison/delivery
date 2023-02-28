@@ -1,25 +1,25 @@
 import Button from '@/components/Button'
 import ProductQuantity from '@/components/ProductQuantity'
-import Chart from '@/lib/chart'
-import { ChartProduct } from '@/types/product'
+import { withRouter } from 'next/router'
+import { useCart } from '@/contexts/CartContext'
+import { CartProduct } from '@/types/product'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { FaArrowLeft } from 'react-icons/fa'
 import { FiHeart } from 'react-icons/fi'
 
-export default function ProductItem() {
+function ProductItem() {
   const router = useRouter()
+  const {
+    cart,
+    clearCart,
+    decreaseQuantity,
+    increaseQuantity,
+    removeFromCart
+  } = useCart()
 
-  const handleAddToChart = (product: object) => {
-    if (Object.prototype.hasOwnProperty.call(router.query, 'product')) {
-      if (typeof router.query.product === 'string') {
-        const chart = new Chart()
-        const chartProduct = JSON.parse(router.query.product) as ChartProduct
-        chartProduct.quantity = 1
-        chart.add(chartProduct)
-      }
-    }
-
+  const handleAddToCart = () => {
     router.back()
   }
 
@@ -83,11 +83,11 @@ export default function ProductItem() {
             </p>
           </div>
 
-          <Button onClick={() => handleAddToChart(router.query)}>
-            Adicionar ao carrinho
-          </Button>
+          <Button onClick={handleAddToCart}>Adicionar ao carrinho</Button>
         </section>
       </main>
     </main>
   )
 }
+
+export default withRouter(ProductItem)

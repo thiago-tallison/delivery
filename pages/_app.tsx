@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 
 import type { AppProps } from 'next/app'
 import Layout from '@/components/Layout'
+import { CartProvider } from '@/contexts/CartContext'
 const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700']
@@ -18,7 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
       `}</style>
 
       <Layout>
-        <Component {...pageProps} style={inter.className} />
+        <CartProvider>
+          <Component {...pageProps} style={inter.className} />
+        </CartProvider>
       </Layout>
     </>
   )

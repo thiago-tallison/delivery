@@ -1,6 +1,7 @@
 import { Product } from '@/types/product'
 import Link, { LinkProps } from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 type Props = {
   product: Product
@@ -12,17 +13,32 @@ type ProductLinkProps = {
 }
 
 const ProductLink = ({ product, children }: ProductLinkProps) => {
+  const Router = useRouter()
+
   return (
-    <Link
-      href={{
-        pathname: `/b7delivery/products/${product.id}`,
-        query: {
-          product: JSON.stringify(product)
-        }
-      }}
+    <div
+      onClick={() =>
+        Router.push(
+          {
+            pathname: `/b7delivery/products/${product.id}`,
+            query: { product: JSON.stringify(product) }
+          },
+          `/b7delivery/products/${product.id}`
+        )
+      }
     >
       {children}
-    </Link>
+    </div>
+    // <Link
+    //   href={{
+    //     pathname: `/b7delivery/products/${product.id}`,
+    //     query: {
+    //       product: JSON.stringify(product)
+    //     }
+    //   }}
+    // >
+    //   {children}
+    // </Link>
   )
 }
 
